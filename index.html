@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Odin Library</h1>
+        </div>
+        <div class="main">
+            <div class="floating-btn" id="float-btns">
+                <!-- acction buttons -->
+                <button class="btn-base edit" id="btn-edit">Edit</button>
+                <button class="btn-base add" id="btn-add"> Add +</button>
+            </div>
+            <!-- main content -->
+            <div class="card-grid" id="card-grid">
+                
+                <!-- example card -->
+                <div class="card">
+                    <div class="name">Naruto</div>
+                    <div class="auth">by Masashi Kishimoto</div>
+                    <div class="line"></div>
+                    <div class="card-text pages">
+                        Pages: <span class="pages-value">1200</span>
+                    </div>
+                    <div class="card-text genre">
+                        Genre: <span class="genre-value">Science</span>
+                    </div>
+                    <button class="read-status">Not Read</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL -->
+    <dialog id="my-dialog" closedby="any">
+        <div class="modal">
+            <div class="modal-header">New Book</div>
+            <form method="dialog">
+
+                <div class="input-group name-input">
+                    <input type="text" name="name" id="name" placeholder="" autocomplete="off" required>
+                    <label for="name">Name</label>
+                </div>
+
+                <div class="input-group auth-input">
+                    <input type="text" name="auth" id="auth" placeholder="" autocomplete="off" required>
+                    <label for="auth">Auth</label>
+                </div>
+
+                <div class="input-group pages-input">
+                    <input type="number" name="pages" id="pages" placeholder="" autocomplete="off" required>
+                    <label for="pages">Pages</label>
+                </div>
+
+                <div class="input-group read-input">
+                    <button class="btn-base btn-read" type="button" id="read-status">Read</button>
+                </div>
+
+                <div class="input-group genre-input">
+                    <input type="text" name="genre" id="genre" placeholder="" autocomplete="off" required>
+                    <label for="genre">Genre</label>
+                </div>
+
+                <button class="btn-base cancel-btn">Cancel</button>
+                <button class="btn-base save-btn" type="submit">Save</button>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- JAVASCRIPT -->
+    <script src="app.js"></script>
+</body>
+
+</html>
