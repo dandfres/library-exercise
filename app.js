@@ -30,16 +30,18 @@ function addBookToLibrary(name, auth, pages, read) {
 }
 
 function editionMode() {
+    const btnEdit = document.querySelector('#btn-edit');
+    const btnAdd = document.querySelector('#btn-add');
     const allCards = document.querySelectorAll('.card');
     allCards.forEach(card => {
         const editMode = card.dataset.editMode === 'true';
         const btnDelete = card.querySelector('.close-btn');
         card.dataset.editMode = editMode ? "false" : "true";
         btnDelete.dataset.deleteBtn = editMode ? "hidden" : "visible";
+        btnEdit.textContent = editMode ? 'Edit' : 'Cancel';
+        btnAdd.textContent = editMode ? 'Add +' : 'Save Changes';
 
     })
-
-
 }
 
 // Edit and Add listener
@@ -111,7 +113,6 @@ const saveAndShowBook = function(e) {
 
     cardGrid.prepend(clone);
     Mydialog.close();
-    // modalForm.reset();
-    
+    modalForm.reset();
 }
 
