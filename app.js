@@ -1,11 +1,9 @@
 // document.querySelector('dialog').showModal()
 const cardGrid = document.querySelector("#card-grid");
-const inputs = document.querySelectorAll("input:required");
 const floatBtns = document.querySelector("#float-btns");
-const btnEdit = document.querySelector("#btn-edit");
-const btnAdd = document.querySelector("#btn-add");
 const Mydialog = document.querySelector("#my-dialog");
-const cardBook = document.querySelector(".card");
+// const cardBook = document.querySelector(".card");
+const template = document.querySelector('#template')
 
 // BOOK COLECTION
 const myLibrary = [];
@@ -32,10 +30,16 @@ function addBookToLibrary(name, auth, pages, read) {
 }
 
 function editionMode() {
-    const edit = cardBook.dataset.editMode === "true";
-    const closeBtn = document.querySelector(".close-btn");
-    cardBook.dataset.editMode = edit ? "false" : "true";
-    closeBtn.dataset.deleteBtn = edit ? "hidden" : "visible";
+    const allCards = document.querySelectorAll('.card');
+    allCards.forEach(card => {
+        const editMode = card.dataset.editMode === 'true';
+        const btnDelete = card.querySelector('.close-btn');
+        card.dataset.editMode = editMode ? "false" : "true";
+        btnDelete.dataset.deleteBtn = editMode ? "hidden" : "visible";
+
+    })
+
+
 }
 
 // Edit and Add listener
@@ -63,29 +67,51 @@ const getFormAction = function(e) {
     console.log('button pressed', button.dataset.action)
 
     switch (button.dataset.action) {
-        case 'read-status':
+        case 'change-reading-status':
             const isActive = button.dataset.read === 'true';
-            button.dataset.read = isActive ? 'false' : 'true';
+            if (isActive) {
+                button.dataset.read = 'false';
+                button.textContent = 'Not Read';
+            } else {
+                button.dataset.read = 'true';
+                button.textContent = 'Read';
+            }
             break;
         case 'cancel':
             Mydialog.close()
             break;
         case 'save':
-            getFormData(e);
+            saveAndShowBook(e);
             break;
     }
     
 }
 
 
-const getFormData = function(e) {
+const saveAndShowBook = function(e) {
     const name = e.target.querySelector('#name').value;
     const auth = e.target.querySelector('#auth').value;
     const pages = e.target.querySelector('#pages').value;
     const isRead = e.target.querySelector('#read-status').dataset.read;
-    const genre = e.target.querySelector('#genre').value;
+    const contentRead = e.target.querySelector('#read-status').textContent;
 
+    const genre = e.target.querySelector('#genre').value;
+    // instantiate and save book
     const book = new Book(name, auth, pages, isRead, genre);
-    console.log(book)
+    myLibrary.push(book)
+    // clone template
+    const clone = template.content.cloneNode(true);
+    // fill content
+    clone.querySelector('.card-name').textContent = name;
+    clone.querySelector('.card-auth').textContent = `by ${auth}`;
+    clone.querySelector('.pages-value').textContent = pages;
+    clone.querySelector('.genre-value').textContent = genre;
+    clone.querySelector('.read-status').dataset.read = isRead;
+    clone.querySelector('.read-status').textContent = contentRead;
+
+    cardGrid.prepend(clone);
+    Mydialog.close();
+    // modalForm.reset();
+    
 }
 

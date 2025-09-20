@@ -41,16 +41,16 @@
             <button class="close-btn" data-delete-btn="hidden">
               <i class="fa-solid fa-circle-minus"></i>
             </button>
-            <div class="name">Naruto</div>
-            <div class="auth">by Masashi Kishimoto</div>
+            <div class="card-name">Naruto</div>
+            <div class="card-auth">by Masashi Kishimoto</div>
             <div class="line"></div>
-            <div class="card-text pages">
+            <div class="card-pages card-text">
               Pages: <span class="pages-value">1200</span>
             </div>
-            <div class="card-text genre">
+            <div class="card-genre card-text">
               Genre: <span class="genre-value">Science</span>
             </div>
-            <button class="read-status">Not Read</button>
+            <button class="btn-read read-status" data-read="true">Read</button>
           </div>
         </div>
       </div>
@@ -61,6 +61,7 @@
       <div class="modal">
         <div class="modal-header">New Book</div>
 
+        <!-- FORMULARIO -->
         <form method="dialog">
           <!-- name field -->
           <div class="input-group name-input">
@@ -98,11 +99,11 @@
           <!-- read field -->
           <div class="input-group read-input">
             <button
-              class="btn-base btn-read"
+              class="btn-base btn-read read-status"
               type="submit"
-              id="read-status"
-              data-action="read-status"
+              data-action="change-reading-status"
               data-read="true"
+              id="read-status"
             >
               Read
             </button>
@@ -139,16 +140,16 @@
         <button class="close-btn" data-delete-btn="hidden">
           <i class="fa-solid fa-circle-minus"></i>
         </button>
-        <div class="name"></div>
-        <div class="auth"></div>
+        <div class="card-name"></div>
+        <div class="card-auth"></div>
         <div class="line"></div>
-        <div class="card-text pages">
+        <div class="card-pages card-text">
           Pages: <span class="pages-value"></span>
         </div>
-        <div class="card-text genre">
+        <div class="card-genre card-text">
           Genre: <span class="genre-value"></span>
         </div>
-        <button class="read-status"></button>
+        <button class="btn-read read-status" data-read="true"></button>
       </div>
     </template>
 

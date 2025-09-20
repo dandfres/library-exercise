@@ -134,18 +134,18 @@ h1 {
     box-shadow: 1px 1px 5px #2b303a3c;
     padding: 1.25rem 1.75rem;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(5, auto);
-    row-gap: .25rem;
+    row-gap: .5rem;
 }
 
-.card .name {
+.card-name {
     font-size: 1.75rem;
     font-weight: 600;
     grid-column: 1 / 3;   
 }
 
-.auth {
+.card-auth {
     grid-column: 1 / 3;   
     font-size: .75rem;
     font-weight: 300;
@@ -160,33 +160,26 @@ h1 {
 
 .card-text {
     font-weight: 500;
-    grid-column: 1 / 3;   
+    grid-column: 1 / 3;
 }
 
-.pages {
-    grid-row: 4 / 5;
-}
+.card-pages {grid-row: 4 / 5;}
 
-.genre {
-    grid-row: 5 / 6;
-}
+.card-genre {grid-row: 5 / 6;}
 
-.read-status {
+.btn-read {
     grid-column: 2 / 3;
     grid-row: 4 / 6;   
-    background: var(--status-read);
     border-radius: .5rem;
     border: none;
-    width: 5.5rem;
     padding: .5rem 0;
     font-family: inherit;
     font-weight: normal;
-    color: var(--bg-main);
     font-size: 1rem;
-    align-self: center;
-    justify-self: end;
-    height: min-content;
+    align-self: end;
 }
+
+
 
 .card[data-edit-mode="true"] {
     animation: wobble .3s infinite ease-in-out;
@@ -233,7 +226,7 @@ dialog {
     transform: translate(-50%, -50%);
     border-radius: 1rem;
     padding: 2rem;
-    min-width: 320px;
+    min-width: 340px;
     transition: all ease 1s;
 }
 
@@ -271,6 +264,8 @@ dialog::backdrop {
     font-size: 1rem;
     border-radius: .5rem;
     border: 1px solid var(--black);
+    border: none;
+    box-shadow: 0 1px 5px #00000038;
     background: var(--white);
 }
 
@@ -302,15 +297,16 @@ input:focus + label {
     color: #2b303ac0;
 }
 
-.btn-read,
-[data-read='true'] {
+/* modal buttons styles */
+#read-status[data-read='true'],
+.read-status[data-read='true'] {
     background-color: var(--status-read);
     border: 1px solid var(--status-read);
     color: var(--white);
 }
 
-.btn-unread,
-[data-read='false'] {
+#read-status[data-read='false'],
+.read-status[data-read='false'] {
     background-color: var(--status-unread);
     border-color: var(--status-unread);
     color: var(--white);
@@ -337,6 +333,7 @@ input:focus + label {
 .save-btn:active {
     background-color: var(--lighter-dark);
 }
+/* ============================== */
 
 .name-input {grid-column: 1 / 3;}
 
