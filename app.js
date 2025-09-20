@@ -1,16 +1,16 @@
 // document.querySelector('dialog').showModal()
-const cardGrid = document.querySelector('#card-grid');
-const inputs = document.querySelectorAll('input:required')
-const floatBtns = document.querySelector('#float-btns');
-const btnEdit = document.querySelector('#btn-edit');
-const btnAdd = document.querySelector('#btn-add');
-const Mydialog = document.querySelector('#my-dialog');
-const readStatus = document.querySelector('#read-status');
+const cardGrid = document.querySelector("#card-grid");
+const inputs = document.querySelectorAll("input:required");
+const floatBtns = document.querySelector("#float-btns");
+const btnEdit = document.querySelector("#btn-edit");
+const btnAdd = document.querySelector("#btn-add");
+const Mydialog = document.querySelector("#my-dialog");
+const cardBook = document.querySelector(".card");
 
 // BOOK COLECTION
 const myLibrary = [];
 
-// CONTRUCTOR FUNCTION
+// BOOK CONSTRUCTOR
 function Book(name, auth, pages, read) {
     this.name = name;
     this.auth = auth;
@@ -22,9 +22,8 @@ function Book(name, auth, pages, read) {
 // SHOW LAST BOOK
 function renderLibrary() {
     const lastBook = myLibrary.length - 1;
-    console.log(myLibrary[lastBook])
+    console.log(myLibrary[lastBook]);
 }
-
 
 function addBookToLibrary(name, auth, pages, read) {
     const newBook = new Book(name, auth, pages, read);
@@ -32,24 +31,61 @@ function addBookToLibrary(name, auth, pages, read) {
     renderLibrary();
 }
 
+function editionMode() {
+    const edit = cardBook.dataset.editMode === "true";
+    const closeBtn = document.querySelector(".close-btn");
+    cardBook.dataset.editMode = edit ? "false" : "true";
+    closeBtn.dataset.deleteBtn = edit ? "hidden" : "visible";
+}
 
-floatBtns.addEventListener('click', e => {
-    if (e.target.closest('#btn-add')) {
-        Mydialog.showModal()
-    }
-    // console.log(e.target)
+// Edit and Add listener
+floatBtns.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    // check that button
+    if (button?.matches("#btn-add")) {
+        Mydialog.showModal();
+        document.activeElement.blur();
+    } 
+    else if (button?.matches("#btn-edit")) editionMode();
 });
 
-readStatus.addEventListener('click', () => {
-    // console.log(readStatus.textContent)
-    const value = readStatus.textContent;
-    if (value === 'Read') {
-        readStatus.classList.remove('btn-read');
-        readStatus.classList.add('btn-unread');
-        readStatus.textContent = 'Not Read';
-    } else if (value === 'Not Read') {
-        readStatus.classList.remove('btn-unread');
-        readStatus.classList.add('btn-read');
-        readStatus.textContent = 'Read';
+// form button listener
+const modalForm = document.querySelector('form');
+
+modalForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    // get button elements of form
+    getFormAction(e)
+});
+
+const getFormAction = function(e) {
+    const button = e.submitter;
+    console.log('button pressed', button.dataset.action)
+
+    switch (button.dataset.action) {
+        case 'read-status':
+            const isActive = button.dataset.read === 'true';
+            button.dataset.read = isActive ? 'false' : 'true';
+            break;
+        case 'cancel':
+            Mydialog.close()
+            break;
+        case 'save':
+            getFormData(e);
+            break;
     }
-})
+    
+}
+
+
+const getFormData = function(e) {
+    const name = e.target.querySelector('#name').value;
+    const auth = e.target.querySelector('#auth').value;
+    const pages = e.target.querySelector('#pages').value;
+    const isRead = e.target.querySelector('#read-status').dataset.read;
+    const genre = e.target.querySelector('#genre').value;
+
+    const book = new Book(name, auth, pages, isRead, genre);
+    console.log(book)
+}
+
